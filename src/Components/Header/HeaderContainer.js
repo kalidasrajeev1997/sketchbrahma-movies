@@ -27,7 +27,7 @@ const HeaderContainer = (props) => {
     <Container>
       <LogoContainer
         onClick={() => {
-          navigate(`/page/1`);
+          navigate(`/`);
         }}
       >
         <Img source={Images.LOGO.default} height="40px" />
