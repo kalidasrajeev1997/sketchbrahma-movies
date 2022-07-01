@@ -23,7 +23,23 @@ export const getMovie = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     try {
       const apiConfig = {
-        pathname: `/movie/${id}?api_key=${apiKey}&language=en-US`,
+        pathname: `movie/${id}?api_key=${apiKey}&language=en-US`,
+      };
+      const url = apiURL + apiConfig.pathname;
+      const asyncRes = await apiCaller(url);
+      return asyncRes;
+    } catch (e) {
+      return rejectWithValue(e);
+    }
+  }
+);
+
+export const search = createAsyncThunk(
+  "search",
+  async (query, { rejectWithValue }) => {
+    try {
+      const apiConfig = {
+        pathname: `search/movie?api_key=${apiKey}&language=en-US&query=${query}&page=1`,
       };
       const url = apiURL + apiConfig.pathname;
       const asyncRes = await apiCaller(url);

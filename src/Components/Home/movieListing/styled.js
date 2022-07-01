@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 14px;
 `;
 
 export const MovieCard = styled.div`

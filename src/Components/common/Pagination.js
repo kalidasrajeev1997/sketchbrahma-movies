@@ -43,7 +43,6 @@ const Pagination = (props) => {
         <div className="arrow left" />
       </li>
       {paginationRange.map((pageNumber, index) => {
-        console.log(index);
         if (pageNumber === DOTS) {
           return (
             <li className="pagination-item dots" key={index}>

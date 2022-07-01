@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getPopularMovies, getMovie } from "./services";
+import { getPopularMovies, getMovie, search } from "./services";
 import { MOVIE_ACTIONS } from "./types";
 
 // Define the initial state using that type
@@ -7,12 +7,21 @@ const initialState = {
   movieActionType: "",
   movies: {},
   currentMovie: {},
+  search: {},
+  searchActionType: "",
 };
 
 export const MovieSlice = createSlice({
   name: "movies",
   initialState,
-  reducers: {},
+  reducers: {
+    clearSearch: (state) => {
+      return {
+        ...state,
+        search: {},
+      };
+    },
+  },
   extraReducers: (movies) => {
     movies.addCase(getPopularMovies.pending, (state) => {
       return {
@@ -56,7 +65,29 @@ export const MovieSlice = createSlice({
         movieActionType: MOVIE_ACTIONS.FETCHING_MOVIE_DETAILS_FAILED,
       };
     });
+    movies.addCase(search.pending, (state) => {
+      return {
+        ...state,
+        search: {},
+        searchActionType: MOVIE_ACTIONS.SEARCH_IN_PROGRESS,
+      };
+    });
+    movies.addCase(search.fulfilled, (state, { payload: data }) => {
+      return {
+        ...state,
+        search: data,
+        searchActionType: MOVIE_ACTIONS.SEARCH_SUCCESS,
+      };
+    });
+    movies.addCase(search.rejected, (state) => {
+      return {
+        ...state,
+        search: {},
+        searchActionType: MOVIE_ACTIONS.SEARCH_FAILED,
+      };
+    });
   },
 });
 
+export const { clearSearch } = MovieSlice.actions;
 export default MovieSlice.reducer;

@@ -29,7 +29,7 @@ const MovieContainer = (props) => {
         <>
           <Details>
             <DetailsContainer>
-              <div onClick={() => navigate(-1)}>
+              <div onClick={() => navigate(-1)} style={{ cursor: "pointer" }}>
                 <Img source={Images.ARROW.default} height="32px" width="32px" />
               </div>
               <H>{currentMovie.original_title}</H>

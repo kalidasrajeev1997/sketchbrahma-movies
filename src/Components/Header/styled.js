@@ -19,6 +19,7 @@ export const LogoContainer = styled.div`
 
 export const SearchContainer = styled.div`
   display: flex;
+  position: relative;
 `;
 
 export const Input = styled.input`
@@ -40,7 +41,7 @@ export const Button = styled.button`
   background: #f46b45;
   background: -webkit-linear-gradient(to bottom, #eea849, #f46b45);
   background: linear-gradient(to bottom, #eea849, #f46b45);
-  height: 37px;
+  height: 36px;
   border: none;
   border-radius: 0px 4px 4px 0px;
   width: 40px;
