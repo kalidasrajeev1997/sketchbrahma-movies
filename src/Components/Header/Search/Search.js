@@ -1,69 +1,72 @@
-import React from "react";
-import { ImageURL } from "../../../config/config";
-import moment from "moment";
-import { stripChars } from "../../utils";
+import React, { useRef } from "react";
 import styled from "styled-components";
+import Images from "../../../config/images";
 import Img from "../../common/Images";
-import { useNavigate } from "react-router-dom";
-import { clearSearch } from "../../../Store/movies/movieSlice";
-import { useDispatch } from "react-redux";
-const SearchContinaer = styled.div`
-  position: absolute;
-  height: 400px;
-  overflow: auto;
-  background: black;
-  width: 100%;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  border-radius: 4px;
-  top: 40px;
-`;
+import { useOnClickOutside } from "../../customHooks/useOnClickOutside";
+import SearchListing from "./SearchListing";
 
-const SearchItem = styled.div`
-  padding: 10px;
+const SearchContainer = styled.div`
   display: flex;
+  position: relative;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
-const SearchDetails = styled.div`
-  font-size: 14px;
-  margin-left: 10px;
+const Input = styled.input`
+  height: 32px;
+  background: #334a6a;
+  border: 1px solid #7a7a7a;
+  border-radius: 4px 0px 0px 4px;
+  width: 300px;
+  font-family: poppins;
+  text-indent: 10px;
+  color: white;
+  outline: none;
+  ::placeholder {
+    color: #ddd;
+  }
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+`;
+
+const Button = styled.button`
+  background: #f46b45;
+  background: -webkit-linear-gradient(to bottom, #eea849, #f46b45);
+  background: linear-gradient(to bottom, #eea849, #f46b45);
+  height: 36px;
+  border: none;
+  border-radius: 0px 4px 4px 0px;
+  width: 40px;
 `;
 
 const Search = (props) => {
-  const { searchResults } = props;
-  let navigate = useNavigate();
-  const dispatch = useDispatch();
-
+  const {
+    debouncedResults,
+    showSearchHandle,
+    showSearchListing,
+    searchResults,
+    setShowSearchListing,
+  } = props;
+  const ref = useRef();
+  useOnClickOutside(ref, () => setShowSearchListing(false));
   return (
-    searchResults?.results && (
-      <SearchContinaer>
-        {searchResults?.results?.map((item) => {
-          return (
-            <SearchItem
-              key={item.id}
-              onClick={() => {
-                navigate(`/movie/${item.id}`);
-                dispatch(clearSearch());
-              }}
-            >
-              <div>
-                <Img
-                  source={
-                    item.poster_path ? `${ImageURL}${item.poster_path}` : null
-                  }
-                  width="60px"
-                  height="60px"
-                  fit="cover"
-                />
-              </div>
-              <SearchDetails>
-                <div>{stripChars(item.title, 25)}</div>
-                <div>{moment(item.release_date).year() || "Not Available"}</div>
-              </SearchDetails>
-            </SearchItem>
-          );
-        })}
-      </SearchContinaer>
-    )
+    <SearchContainer ref={ref}>
+      <Input
+        type="text"
+        placeholder="Search movies"
+        onChange={debouncedResults}
+        onFocus={(e) => {
+          debouncedResults(e);
+          showSearchHandle();
+        }}
+      />
+      <Button>
+        <Img source={Images.SEARCH.default} height="20px" />
+      </Button>
+      {showSearchListing && <SearchListing searchResults={searchResults} />}
+    </SearchContainer>
   );
 };
 

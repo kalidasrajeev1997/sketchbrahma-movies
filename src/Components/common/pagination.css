@@ -2,6 +2,7 @@
   display: flex;
   list-style-type: none;
   justify-content: center;
+  padding: 0px;
 }
 .pagination-container .pagination-item {
   padding: 0 12px;
@@ -18,6 +19,14 @@
   font-size: 13px;
   min-width: 32px;
 }
+
+@media (max-width: 991px) {
+  .pagination-container .pagination-item {
+    padding: 0 5px;
+    min-width: 27px;
+  }
+}
+
 .pagination-container .pagination-item.dots:hover {
   background-color: transparent;
   cursor: default;

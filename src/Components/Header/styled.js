@@ -7,6 +7,11 @@ export const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0px 30px;
+  @media (max-width: 768px) {
+    height: auto;
+    flex-direction: column;
+    padding: ${(props) => (props.searchBar ? "0px 30px 20px" : "0xp 30px")};
+  }
 `;
 
 export const LogoContainer = styled.div`
@@ -15,34 +20,9 @@ export const LogoContainer = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
-`;
-
-export const SearchContainer = styled.div`
-  display: flex;
-  position: relative;
-`;
-
-export const Input = styled.input`
-  height: 32px;
-  background: #334a6a;
-  border: 1px solid #7a7a7a;
-  border-radius: 4px 0px 0px 4px;
-  width: 300px;
-  font-family: poppins;
-  text-indent: 10px;
-  color: white;
-  outline: none;
-  ::placeholder {
-    color: #ddd;
+  @media (max-width: 768px) {
+    justify-content: flex-start;
+    width: 100%;
+    margin: 20px 0px;
   }
-`;
-
-export const Button = styled.button`
-  background: #f46b45;
-  background: -webkit-linear-gradient(to bottom, #eea849, #f46b45);
-  background: linear-gradient(to bottom, #eea849, #f46b45);
-  height: 36px;
-  border: none;
-  border-radius: 0px 4px 4px 0px;
-  width: 40px;
 `;

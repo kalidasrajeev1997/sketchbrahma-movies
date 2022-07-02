@@ -9,6 +9,7 @@ const initialState = {
   currentMovie: {},
   search: {},
   searchActionType: "",
+  searchbar: true,
 };
 
 export const MovieSlice = createSlice({
@@ -19,6 +20,12 @@ export const MovieSlice = createSlice({
       return {
         ...state,
         search: {},
+      };
+    },
+    SearchBarStatus: (state, action) => {
+      return {
+        ...state,
+        searchbar: action.payload,
       };
     },
   },
@@ -89,5 +96,5 @@ export const MovieSlice = createSlice({
   },
 });
 
-export const { clearSearch } = MovieSlice.actions;
+export const { clearSearch, SearchBarStatus } = MovieSlice.actions;
 export default MovieSlice.reducer;

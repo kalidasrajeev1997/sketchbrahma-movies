@@ -8,6 +8,7 @@ import {
   DetailsContainer,
   Overview,
   DateDiv,
+  BackButton,
 } from "./styled";
 import Images from "../../config/images";
 import { ImageURL } from "../../config/config";
@@ -29,9 +30,12 @@ const MovieContainer = (props) => {
         <>
           <Details>
             <DetailsContainer>
-              <div onClick={() => navigate(-1)} style={{ cursor: "pointer" }}>
+              <BackButton
+                onClick={() => navigate(-1)}
+                style={{ cursor: "pointer" }}
+              >
                 <Img source={Images.ARROW.default} height="32px" width="32px" />
-              </div>
+              </BackButton>
               <H>{currentMovie.original_title}</H>
               <div>Rating: {convertRating(currentMovie.vote_average)}/5</div>
               <Overview>{currentMovie.overview}</Overview>

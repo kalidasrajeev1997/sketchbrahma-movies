@@ -7,8 +7,9 @@ import { clearSearch } from "../../Store/movies/movieSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
-  const [showSearch, setShowSearch] = useState(true);
+  const [showSearchListing, setShowSearchListing] = useState(true);
   const searchResults = useSelector((state) => state.movies.search);
+  const searchBar = useSelector((state) => state.movies.searchbar);
 
   const handleChange = useCallback(
     (e) => {
@@ -26,16 +27,17 @@ const Header = () => {
   }, [handleChange]);
 
   const showSearchHandle = () => {
-    setShowSearch(true);
+    setShowSearchListing(true);
   };
 
   return (
     <HeaderContainer
       debouncedResults={debouncedResults}
       searchResults={searchResults}
-      setShowSearch={setShowSearch}
-      showSearch={showSearch}
+      setShowSearchListing={setShowSearchListing}
+      showSearchListing={showSearchListing}
       showSearchHandle={showSearchHandle}
+      searchBar={searchBar}
     />
   );
 };

@@ -3,6 +3,7 @@ import MovieContainer from "./MovieContainer";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getMovie } from "../../Store/movies/services";
+import { SearchBarStatus } from "../../Store/movies/movieSlice";
 const Movie = () => {
   let params = useParams();
   const dispatch = useDispatch();
@@ -10,6 +11,7 @@ const Movie = () => {
   const moviesAction = useSelector((state) => state.movies.movieActionType);
   useEffect(() => {
     dispatch(getMovie(params.id));
+    dispatch(SearchBarStatus(false));
   }, [dispatch, params.id]);
   return (
     <MovieContainer currentMovie={currentMovie} moviesAction={moviesAction} />

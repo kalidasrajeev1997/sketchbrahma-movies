@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getPopularMovies } from "../../Store/movies/services";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { SearchBarStatus } from "../../Store/movies/movieSlice";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getPopularMovies(currentPage));
+    dispatch(SearchBarStatus(true));
   }, [currentPage, dispatch]);
 
   const setPage = (page) => {

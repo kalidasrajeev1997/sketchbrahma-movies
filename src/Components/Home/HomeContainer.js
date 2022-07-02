@@ -13,7 +13,13 @@ const HomeContainer = (props) => {
   return (
     <Container>
       <div>
-        <Img source={Images.WALL} height="262px" width="100%" fit="cover" />
+        <Img
+          source={Images.WALL}
+          height="262px"
+          width="100%"
+          fit="cover"
+          mobileHeight="150px"
+        />
       </div>
       <ListingContainer>
         <H>Trending</H>

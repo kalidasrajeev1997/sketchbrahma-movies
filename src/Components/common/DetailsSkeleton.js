@@ -7,6 +7,10 @@ const Details = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media (max-width: 991px) {
+    width: 100%;
+    background: #0c111b;
+  }
 `;
 
 const DetailsContainer = styled.div`

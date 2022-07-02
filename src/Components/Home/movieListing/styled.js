@@ -4,11 +4,20 @@ export const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
+  @media (max-width: 1170px) {
+    gap: 10px;
+  }
 `;
 
 export const MovieCard = styled.div`
   width: 24%;
   cursor: pointer;
+  @media (max-width: 991px) {
+    width: 49%;
+  }
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 export const MoveDetails = styled.div`
